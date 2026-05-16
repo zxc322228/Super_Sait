@@ -472,3 +472,77 @@ h1 {
     width: 100%;
     display: block;
 }
+
+/* Стили для файлов */
+.file-list {
+    margin-top: 15px;
+}
+
+.file-item {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.file-meta {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.file-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-download {
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.btn-delete-file {
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.upload-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.upload-title {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.empty-files {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255,255,255,0.5);
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}

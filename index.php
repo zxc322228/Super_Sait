@@ -33,14 +33,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Email '$e' уже занят!";
     }
     
-    // Проверка 4: пароль минимум 6 символов
+    // Проверка пароля
     if(strlen($p) < 6 && !$error) {
         $error = "Пароль должен быть не менее 6 символов!";
     }
     
-    // Если ошибок нет 
+    // Если ошибок нет - создаем пользователя
     if($error == '') {
-        $connect->query("INSERT INTO users (name, login, email, password) VALUES ('$n','$l','$e','$p')");
+        // Экранируем данные
+        $n_safe = $connect->real_escape_string($n);
+        $l_safe = $connect->real_escape_string($l);
+        $e_safe = $connect->real_escape_string($e);
+        $p_safe = $connect->real_escape_string($p);
+        
+        $connect->query("INSERT INTO users (name, login, email, password) VALUES ('$n_safe','$l_safe','$e_safe','$p_safe')");
+        $user_id = $connect->insert_id;
+        
+        // Загружаем файл если есть
+        if(isset($_FILES['user_file']) && $_FILES['user_file']['error'] == 0 && $_FILES['user_file']['size'] > 0) {
+            $file = $_FILES['user_file'];
+            $original_name = $file['name'];
+            $file_size = $file['size'];
+            $ext = pathinfo($original_name, PATHINFO_EXTENSION);
+            $new_filename = time() . "_" . rand(1000,9999) . "." . $ext;
+            
+            if($file['size'] <= 10 * 1024 * 1024) { // 10MB лимит
+                if(move_uploaded_file($file['tmp_name'], "uploads/" . $new_filename)) {
+                    $original_name_escaped = $connect->real_escape_string($original_name);
+                    $connect->query("INSERT INTO user_files (user_id, filename, original_name, file_size) 
+                                   VALUES ($user_id, '$new_filename', '$original_name_escaped', $file_size)");
+                }
+            }
+        }
         
         // Редирект через GET параметр
         header("Location: index.php?success=1");
@@ -50,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Показываем сообщение из GET параметра
 if(isset($_GET['success'])) {
-    $msg = "Регистрация успешна!";
+    $msg = "Регистрация успешна! <a href='users.php' style='color: #88ff88;'>Перейти к списку пользователей →</a>";
 }
 ?>
 
@@ -73,18 +97,27 @@ if(isset($_GET['success'])) {
                 <div class="alert-error" style="background:#f8d7da;color:#721c24;padding:10px;margin-bottom:15px;border-radius:5px;text-align:center"><?php echo $error; ?></div>
             <?php endif; ?>
             
-            <form method="POST">
-                <div class="form-group"><label>Имя</label>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Имя</label>
                     <input type="text" name="name" value="<?php echo htmlspecialchars($old_name); ?>" required>
                 </div>
-                <div class="form-group"><label>Логин</label>
+                <div class="form-group">
+                    <label>Логин</label>
                     <input type="text" name="login" value="<?php echo htmlspecialchars($old_login); ?>" required>
                 </div>
-                <div class="form-group"><label>Email</label>
+                <div class="form-group">
+                    <label>Email</label>
                     <input type="email" name="email" value="<?php echo htmlspecialchars($old_email); ?>" required>
                 </div>
-                <div class="form-group"><label>Пароль</label>
+                <div class="form-group">
+                    <label>Пароль</label>
                     <input type="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Аватар/Файл (необязательно)</label>
+                    <input type="file" name="user_file" accept="image/*,.pdf,.txt,.doc">
+                    <div class="help-text">Можно загрузить фото, документ или любой файл (макс. 10MB)</div>
                 </div>
                 <button type="submit">Зарегистрироваться</button>
             </form>
