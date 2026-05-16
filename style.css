@@ -5,10 +5,28 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, rgb(224, 14, 231) 0%, rgb(231, 11, 165) 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0a0a0a;
     min-height: 100vh;
     padding: 40px 20px;
+    position: relative;
+}
+
+/* Фоновое изображение */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('sait.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.4;
+    z-index: -1;
 }
 
 .container {
@@ -16,27 +34,32 @@ body {
     margin: 0 auto;
 }
 
+/* Карточки  */
 .card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-header {
-    background: linear-gradient(135deg, rgb(224, 14, 231) 0%, rgb(231, 11, 165) 100%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
     padding: 25px;
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-header h1 {
-    color: white;
-    font-size: 24px;
+    color: #ffffff;
+    font-size: 28px;
     margin-bottom: 5px;
+    letter-spacing: 1px;
 }
 
 .card-header p {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
 }
 
@@ -53,31 +76,39 @@ body {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #333;
+    color: #ffffff;
 }
 
 .form-group label.required::after {
     content: " *";
-    color: rgb(224, 14, 231);
+    color: #ff4444;
 }
 
 .form-group input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     font-size: 14px;
-    transition: border-color 0.3s;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    transition: all 0.3s;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: rgb(224, 14, 231);
+    border-color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .help-text {
     font-size: 12px;
-    color: #999;
+    color: rgba(255, 255, 255, 0.5);
     margin-top: 5px;
 }
 
@@ -90,87 +121,94 @@ body {
 
 .btn-save {
     flex: 1;
-    background: linear-gradient(135deg, rgb(224, 14, 231) 0%, rgb(231, 11, 165) 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s;
 }
 
 .btn-save:hover {
     transform: scale(1.02);
+    background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .btn-cancel {
     flex: 1;
-    background: #6c757d;
+    background: rgba(100, 100, 100, 0.5);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    transition: background 0.3s;
+    transition: all 0.3s;
 }
 
 .btn-cancel:hover {
-    background: #5a6268;
+    background: rgba(120, 120, 120, 0.7);
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, rgb(224, 14, 231) 0%, rgb(231, 11, 165) 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
     color: white;
-    border: none;
-    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
+    transition: all 0.3s;
 }
 
 button:hover {
     opacity: 0.9;
+    background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
 }
 
 /* Уведомления */
 .alert {
     padding: 12px 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
 .alert-success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background: rgba(40, 167, 69, 0.3);
+    color: #88ff88;
+    border: 1px solid rgba(40, 167, 69, 0.5);
+    backdrop-filter: blur(5px);
 }
 
 .alert-error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background: rgba(220, 53, 69, 0.3);
+    color: #ff8888;
+    border: 1px solid rgba(220, 53, 69, 0.5);
+    backdrop-filter: blur(5px);
 }
 
 .info-id {
-    background: #f0f0f0;
+    background: rgba(0, 0, 0, 0.5);
     padding: 10px 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 20px;
     text-align: center;
     font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .info-id strong {
-    color: rgb(224, 14, 231);
+    color: #ffffff;
 }
 
 /* Список пользователей */
@@ -199,22 +237,27 @@ button:hover {
 }
 
 .user-card {
-    background: white;
-    border-radius: 10px;
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
     height: 100%;
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .user-card .card-header {
     padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
 }
 
 .user-card .card-header h3 {
@@ -231,109 +274,114 @@ button:hover {
 .user-info {
     margin-bottom: 12px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-info strong {
     display: inline-block;
     width: 80px;
-    color: rgb(224, 14, 231);
+    color: #ffffff;
 }
 
 .user-info span {
-    color: #555;
+    color: rgba(255, 255, 255, 0.7);
     word-break: break-all;
 }
 
 .user-id {
-    background: #f0f0f0;
+    background: rgba(0, 0, 0, 0.5);
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 10px;
     font-size: 12px;
-    color: #666;
+    color: rgba(255, 255, 255, 0.6);
     text-align: center;
 }
 
 .user-id strong {
-    color: rgb(224, 14, 231);
+    color: #ffffff;
 }
 
 .user-card .card-footer {
-    background: #f5f5f5;
+    background: rgba(0, 0, 0, 0.4);
     padding: 12px;
     text-align: center;
     font-size: 12px;
-    color: #777;
-    border-top: 1px solid #eee;
+    color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .delete-btn {
-    background: #dc3545;
+    background: rgba(220, 53, 69, 0.8);
     color: white;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
     width: 100%;
-    transition: background 0.3s;
+    transition: all 0.3s;
     margin-top: 10px;
 }
 
 .delete-btn:hover {
-    background: #c82333;
+    background: rgba(220, 53, 69, 1);
+    transform: scale(1.02);
 }
 
 .edit-btn {
     display: block;
     text-align: center;
-    background: #007bff;
+    background: rgba(0, 123, 255, 0.8);
     color: white;
     text-decoration: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 10px;
     font-weight: bold;
-    transition: background 0.3s;
+    transition: all 0.3s;
 }
 
 .edit-btn:hover {
-    background: #0056b3;
+    background: rgba(0, 123, 255, 1);
+    transform: scale(1.02);
 }
 
 .empty-message {
     text-align: center;
     color: white;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
     padding: 40px;
-    border-radius: 10px;
+    border-radius: 20px;
     font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .counter {
     text-align: center;
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
     font-size: 14px;
-    opacity: 0.9;
 }
 
 .back-btn {
     display: inline-block;
-    background: white;
-    color: rgb(224, 14, 231);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     text-decoration: none;
     margin-bottom: 20px;
     font-weight: bold;
     transition: 0.3s;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .back-btn:hover {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.2);
     transform: scale(1.02);
 }
 
@@ -342,7 +390,7 @@ h1 {
     color: white;
     margin-bottom: 30px;
     font-size: 32px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .users-link {
@@ -351,21 +399,23 @@ h1 {
 }
 
 .users-link a {
-    color: rgb(224, 14, 231);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-size: 14px;
+    transition: 0.3s;
 }
 
 .users-link a:hover {
+    color: white;
     text-decoration: underline;
 }
 
 .card-footer {
-    background: #f5f5f5;
+    background: rgba(0, 0, 0, 0.4);
     padding: 15px;
     text-align: center;
     font-size: 12px;
-    color: #777;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 /* Стили только для главной страницы */
